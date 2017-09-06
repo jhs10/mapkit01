@@ -57,15 +57,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
                     leftIconView.image = UIImage(named:"logo.png" )
                     annotationView?.leftCalloutAccessoryView = leftIconView
                 
-                } else if annotation.title! == "동의과학대학교"{
+                } else {
                     
                     annotationView?.pinTintColor = UIColor.red
                     
                     let rightIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
                     rightIconView.image = UIImage(named:"bright-7.png" )
                     annotationView?.leftCalloutAccessoryView = rightIconView
-                    
-            }else{
+                }
+            else {
                 
                 annotationView?.annotation = annotation
 
@@ -82,6 +82,16 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         func mapView(_mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped: UIControl){
             print("call my tapped!")
+            
+            let viewAnno = view.annotation
+            let viewTitle: String = ((viewAnno?.title)!)!
+            let viewSubTitle: String = ((viewAnno?.subtitle)!)!
+            
+            print("\(viewTitle) \(viewSubTitle)")
+            
+            let ac = UIAlertController(title: viewTitle, message: viewSubTitle, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
     }
         
         // Do any additional setup after loading the view, typically from a nib.
